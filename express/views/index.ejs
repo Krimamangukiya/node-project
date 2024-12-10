@@ -1,0 +1,32 @@
+<form action="/createData">
+    NAME :-<input type="text" name="name" value=" <%= (editData) ? editData.name:"" %>">
+    SURNAME :-<input type="text" name="surname" value="<%= (editData) ? editData.surname : ""%>">
+    EMAIL :-<input type="text" name="email" value="<%= (editData) ? editData.email :"" %>">
+    SUBMIT :- <input type="submit">
+</form>
+<table border="1">
+    <tr>
+        <td>NAME</td>
+        <td>SURNAME</td>
+        <td>EMAIL</td>
+        <td>DELETE</td>
+        <td>EDIT</td>
+    </tr>
+    <% sdata.map((el,i)=>{
+        %>
+        <tr>
+            <td>    
+                <%= el.name %>
+            </td>
+            <td>
+                <%= el.surname %>
+            </td>
+            <td>
+                <%= el.email %>
+            </td>
+            <td><button><a href="/deleteData?delete=<%= i %>">DELETE</a></button></td>
+            <td><button><a href="/editData?edit=<%= i %>">EDIT</a></button></td>
+        </tr>
+        <% }) %>
+
+</table>

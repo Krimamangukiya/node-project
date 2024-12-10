@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+</head>
+<body>
+    <form action="/createData">
+        <input type="hidden" name="id" value="<%= (editData) ? editData.id : '' %>">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="<%= (editData) ? editData.name : '' %>">
+        <label for="surname">Surname:</label>
+        <input type="text" name="surname" value="<%= (editData) ? editData.surname : '' %>">
+        <br><br>
+
+        <label for="gender">Gender:</label><br>
+        Male: <input type="radio" name="gender" value="male" <%= (editData && editData.gender === 'male') ? 'checked' : '' %>>
+        Female: <input type="radio" name="gender" value="female" <%= (editData && editData.gender === 'female') ? 'checked' : '' %>>
+        <br><br>
+
+        <label for="hobby">Hobby:</label><br>
+        Singing: <input type="checkbox" name="hobby" value="singing" <%= (editData && editData.hobby.includes('singing')) ? 'checked' : '' %>><br>
+        Reading: <input type="checkbox" name="hobby" value="reading" <%= (editData && editData.hobby.includes('reading')) ? 'checked' : '' %>><br>
+        Dancing: <input type="checkbox" name="hobby" value="dancing" <%= (editData && editData.hobby.includes('dancing')) ? 'checked' : '' %>><br>
+        Cooking: <input type="checkbox" name="hobby" value="cooking" <%= (editData && editData.hobby.includes('cooking')) ? 'checked' : '' %>><br>
+        Drawing: <input type="checkbox" name="hobby" value="drawing" <%= (editData && editData.hobby.includes('drawing')) ? 'checked' : '' %>><br>
+        <br>
+
+        <label for="city">City:</label>
+        <select name="city">
+            <option value="Surat" <%= (editData && editData.city === 'Surat') ? 'selected' : '' %>>Surat</option>
+            <option value="Dwarka" <%= (editData && editData.city === 'Dwarka') ? 'selected' : '' %>>Dwarka</option>
+            <option value="Delhi" <%= (editData && editData.city === 'Delhi') ? 'selected' : '' %>>Delhi</option>
+            <option value="Mumbai" <%= (editData && editData.city === 'Mumbai') ? 'selected' : '' %>>Mumbai</option>
+            <option value="Bhavnagar" <%= (editData && editData.city === 'Bhavnagar') ? 'selected' : '' %>>Bhavnagar</option>
+        </select>
+        <br><br>
+
+        <label for="image">Image URL:</label>
+        <input type="text" name="image" value="<%= (editData) ? editData.image : '' %>">
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Surname</td>
+            <td>gender</td>
+            <td>hobby</td>
+            <td>city</td>
+            <td>imag</td>
+            <td>Delete</td>
+            <td>Edit</td>
+        </tr>
+        <% result.map((ele , i) => { %>
+        <tr>
+            <td><%= ele.id %></td>
+            <td><%= ele.name %></td>
+            <td><%= ele.surname %></td>
+            <td><%= ele.gender %></td>
+            <td><%= ele.hobby %></td>
+            <td><%= ele.city %></td>
+            <td><%= ele.image %></td>
+            <td><button><a href="/deleteData?delete=<%= ele.id %>">DELETE</a></button></td>
+            <td><button><a href="/editData/<%= ele.id %>">EDIT</a></button></td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+</html>

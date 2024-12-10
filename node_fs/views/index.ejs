@@ -1,0 +1,151 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/createdata" method="get">
+        <input type="hidden" name="edit" value="<%= edit %>">
+        NAME: <input type="text" name="name" value="<%= (editdata)?editdata.name : "" %>">
+        SURNAME: <input type="text" name="surname" value="<%= (editdata)?editdata.surname : "" %>">
+        <input type="submit">
+    </form>
+    <table border="1">
+        <tr>
+            <td>NAME</td>
+            <td>SURNAME</td>
+            <td>DELETE</td>
+            <td>EDIT</td>
+        </tr>
+        <% data.map((item,index)=>{
+            %>
+            <tr>
+                <td>
+                    <%=item.name%>
+                </td>
+                <td>
+                    <%=item.surname%>
+                </td>
+                <td><button><a href="/deletedata?delete=<%=index%>">DELETE</a></button></td>
+                <td><button><a href="/editdata?edite=<%=index%>">EDIT</a></button></td>
+            </tr>
+
+            <% }) %>
+    </table>
+
+</body>
+
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"], input[type="file"], select {
+            padding: 5px;
+            margin-bottom: 10px;
+            width: 200px;
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            margin-left: 10px;
+        }
+        
+        button {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table, th, td {
+            border: 1px solid black;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        </style>
+</head>
+
+<body>
+    <form action="/createdata" method="get">
+        NAME: <input type="text" name="name" value="<%= (editdata)?editdata.name : '' %>"><br><br>
+        MALE: <input type="radio" name="gender" value="male" <%= (editdata) ? (editdata.gender == 'male') ? 'checked' : "" : "" %>>
+        FEMALE: <input type="radio" name="gender" value="female" <%= (editdata) ? (editdata.gender == 'female') ? 'checked' : "" : "" %>><br><br>
+        HOBBY: <input type="checkbox" name="h" value="cricket" <%= (editdata) ? (editdata.h.includes('cricket') ? 'checked' : "") : "" %>>Cricket
+        <input type="checkbox" name="h" value="hoky" <%= (editdata) ? (editdata.h.includes('hoky') ? 'checked' : "") : "" %>>Hockey
+        <input type="checkbox" name="h" value="footbol" <%= (editdata) ? (editdata.h.includes('footbol') ? 'checked' : "") : "" %>>Football
+        <input type="checkbox" name="h" value="kabadi" <%= (editdata) ? (editdata.h.includes('kabadi') ? 'checked' : "") : "" %>>Kabadi
+        <input type="checkbox" name="h" value="kusti" <%= (editdata) ? (editdata.h.includes('kusti') ? 'checked' : "") : "" %>>Kusti
+        <input type="checkbox" name="h" value="driving" <%= (editdata) ? (editdata.h.includes('driving') ? 'checked' : "") : "" %>>Driving<br><br>
+        Image: <input type="file" name="img"><br><br>
+        <select id="dropdown1" name="dropdown1">
+            <option value="select" <%= editdata && editdata.dropdown1 === 'select' ? 'selected' : '' %>>Select</option>
+            <option value="surat" <%= editdata && editdata.dropdown1 === 'surat' ? 'selected' : '' %>>Surat</option>
+            <option value="ahemdabad" <%= editdata && editdata.dropdown1 === 'ahemdabad' ? 'selected' : '' %>>Ahemdabad</option>
+            <option value="vadodra" <%= editdata && editdata.dropdown1 === 'vadodra' ? 'selected' : '' %>>Vadodra</option>
+            <option value="bhavnagar" <%= editdata && editdata.dropdown1 === 'bhavnagar' ? 'selected' : '' %>>Bhavnagar</option>
+            <option value="rajkot" <%= editdata && editdata.dropdown1 === 'rajkot' ? 'selected' : '' %>>Rajkot</option>
+            <option value="mumbai" <%= editdata && editdata.dropdown1 === 'mumbai' ? 'selected' : '' %>>Mumbai</option>
+        </select><br><br>
+        <input type="submit">
+    </form>
+
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Hobby</th>
+            <th>City</th>
+            <th>Image</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        <% data.map((item, index) => { %>
+        <tr>
+            <td><%= item.name %></td>
+            <td><%= item.gender %></td>
+            <td><%= item.h %></td>
+            <td><%= item.dropdown1 %></td>
+            <td><%= item.img %></td>
+            <td><button><a href="/deletedata?delete=<%= index %>">Delete</a></button></td>
+            <td><button><a href="/editdata?edite=<%= index %>">Edit</a></button></td>
+        </tr>
+        <% }) %>
+    </table>
+</body>
+
+</html>
